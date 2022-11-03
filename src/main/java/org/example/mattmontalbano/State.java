@@ -7,6 +7,8 @@ public class State {
     private double _xVel;
     private double _yVel;
 
+    public static final double MAX_SPEED = 5; // meters per second
+
     public State(double x, double y, double xVelocity, double yVelocity) {
         _x = x;
         _y = y;
@@ -35,7 +37,7 @@ public class State {
     }
 
     public void setXVelocity(double xVel) {
-        _xVel = xVel;
+        _xVel = enforceSpeedBounds(xVel);
     }
 
     public double getYVelocity() {
@@ -43,6 +45,16 @@ public class State {
     }
 
     public void setYVelocity(double yVel) {
-        _yVel = yVel;
+        _yVel = enforceSpeedBounds(yVel);
+    }
+
+    private double enforceSpeedBounds(double speed) {
+        if (speed < -MAX_SPEED) {
+            return -MAX_SPEED;
+        } else if (speed > MAX_SPEED) {
+            return MAX_SPEED;
+        } else {
+            return speed;
+        }
     }
 }
