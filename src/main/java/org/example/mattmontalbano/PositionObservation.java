@@ -6,12 +6,16 @@ public class PositionObservation implements Observation {
     private final double _x;
     private final double _y;
     private final double _standardDeviation;
+    private final NewRandom _randGen;
     private final NormalDistribution _dist;
 
-    public PositionObservation(double x, double y, double standardDeviation) {
+    public static final double STANDARD_DEVIATION = 3.0;
+
+    public PositionObservation(double x, double y, double standardDeviation, NewRandom randGen) {
         _x = x;
         _y = y;
         _standardDeviation = standardDeviation;
+        _randGen = randGen;
         _dist = new NormalDistribution(0, standardDeviation);
     }
 
@@ -26,24 +30,24 @@ public class PositionObservation implements Observation {
     }
 
     public static PositionObservation[] createNObservations(TimeStateObject[] trueTargetState,
-                                                            double standardDeviation) {
+                                                            double standardDeviation,
+                                                            NewRandom randGen) {
         PositionObservation[] observations = new PositionObservation[trueTargetState.length - 1];
-        NewRandomSingleton randGen = NewRandomSingleton.getInstance();
         for (int i = 0; i < observations.length; i++) {
             TimeStateObject target = trueTargetState[i];
             double x = target.getX() + randGen.nextDoubleBetween(-standardDeviation, standardDeviation);
             double y = target.getY() + randGen.nextDoubleBetween(-standardDeviation, standardDeviation);
-            observations[i] = new PositionObservation(x, y, standardDeviation);
+            observations[i] = new PositionObservation(x, y, standardDeviation, randGen);
         }
         return observations;
     }
 
     public double getX() {
-        return _x + NewRandomSingleton.getInstance().nextDoubleBetween(-_standardDeviation, _standardDeviation);
+        return _x + _randGen.nextDoubleBetween(-_standardDeviation, _standardDeviation);
     }
 
     public double getY() {
-        return _y + NewRandomSingleton.getInstance().nextDoubleBetween(-_standardDeviation, _standardDeviation);
+        return _y + _randGen.nextDoubleBetween(-_standardDeviation, _standardDeviation);
     }
 
     public double getStandardDeviation() {

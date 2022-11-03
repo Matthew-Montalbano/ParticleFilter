@@ -7,10 +7,11 @@ public class Particle extends TimeStateObject {
     private double _weight;
     private boolean _wasSampled;
     private final Map<Long, State> _history;
+    private final NewRandom _randGen;
 
-    public static double POSITION_PERTURBATION_AMOUNT = 2;
-    public static double VELOCITY_PERTURBATION_AMOUNT = 0.5;
-    public static double MANEUVER_AMOUNT = 2;
+    public static final double POSITION_PERTURBATION_AMOUNT = 1;
+    public static final double VELOCITY_PERTURBATION_AMOUNT = 0.5;
+    public static final double MANEUVER_AMOUNT = 2;
 
     public Particle(double x,
                     double y,
@@ -19,25 +20,28 @@ public class Particle extends TimeStateObject {
                     double weight,
                     long time,
                     boolean wasSampled,
-                    Map<Long, State> history) {
+                    Map<Long, State> history,
+                    NewRandom randGen) {
         super(x, y, xVel, yVel, time);
         _weight = weight;
         _time = time;
         _wasSampled = wasSampled;
         _history = history;
+        _randGen = randGen;
     }
 
-    public Particle(double x, double y, double xVel, double yVel, double weight, long time) {
-        this(x, y, xVel, yVel, weight, time, false, new HashMap<>());
+    public Particle(double x, double y, double xVel, double yVel, double weight, long time, NewRandom randGen) {
+        this(x, y, xVel, yVel, weight, time, false, new HashMap<>(), randGen);
     }
 
-    public Particle(PositionObservation observation, double weight, long time) {
+    public Particle(PositionObservation observation, double weight, long time, NewRandom randGen) {
         this(observation.getX(),
              observation.getY(),
-             NewRandomSingleton.getInstance().nextDoubleBetween(-State.MAX_SPEED, State.MAX_SPEED),
-             NewRandomSingleton.getInstance().nextDoubleBetween(-State.MAX_SPEED, State.MAX_SPEED),
+             randGen.nextDoubleBetween(-State.MAX_SPEED, State.MAX_SPEED),
+             randGen.nextDoubleBetween(-State.MAX_SPEED, State.MAX_SPEED),
              weight,
-             time);
+             time,
+             randGen);
     }
 
     public Particle(Particle oldParticle) {
@@ -48,23 +52,22 @@ public class Particle extends TimeStateObject {
              oldParticle._weight,
              oldParticle._time,
              oldParticle._wasSampled,
-             new HashMap<>(oldParticle._history));
+             new HashMap<>(oldParticle._history),
+             oldParticle._randGen);
     }
 
     public void perturb() {
-        NewRandomSingleton randGen = NewRandomSingleton.getInstance();
-        _x += randGen.nextDoubleBetween(-POSITION_PERTURBATION_AMOUNT, POSITION_PERTURBATION_AMOUNT);
-        _y += randGen.nextDoubleBetween(-POSITION_PERTURBATION_AMOUNT, POSITION_PERTURBATION_AMOUNT);
-        setXVelocity(getXVelocity() + randGen.nextDoubleBetween(-VELOCITY_PERTURBATION_AMOUNT,
-                                                                VELOCITY_PERTURBATION_AMOUNT));
-        setYVelocity(getYVelocity() + randGen.nextDoubleBetween(-VELOCITY_PERTURBATION_AMOUNT,
-                                                                VELOCITY_PERTURBATION_AMOUNT));
+        _x += _randGen.nextDoubleBetween(-POSITION_PERTURBATION_AMOUNT, POSITION_PERTURBATION_AMOUNT);
+        _y += _randGen.nextDoubleBetween(-POSITION_PERTURBATION_AMOUNT, POSITION_PERTURBATION_AMOUNT);
+        setXVelocity(getXVelocity() + _randGen.nextDoubleBetween(-VELOCITY_PERTURBATION_AMOUNT,
+                                                                 VELOCITY_PERTURBATION_AMOUNT));
+        setYVelocity(getYVelocity() + _randGen.nextDoubleBetween(-VELOCITY_PERTURBATION_AMOUNT,
+                                                                 VELOCITY_PERTURBATION_AMOUNT));
     }
 
     public void maneuver() {
-        NewRandomSingleton randGen = NewRandomSingleton.getInstance();
-        setXVelocity(getXVelocity() + randGen.nextDoubleBetween(-MANEUVER_AMOUNT, MANEUVER_AMOUNT));
-        setYVelocity(getYVelocity() + randGen.nextDoubleBetween(-MANEUVER_AMOUNT, MANEUVER_AMOUNT));
+        setXVelocity(getXVelocity() + _randGen.nextDoubleBetween(-MANEUVER_AMOUNT, MANEUVER_AMOUNT));
+        setYVelocity(getYVelocity() + _randGen.nextDoubleBetween(-MANEUVER_AMOUNT, MANEUVER_AMOUNT));
     }
 
     public void addCurrentStateToHistory() {

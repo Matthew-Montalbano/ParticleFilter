@@ -5,13 +5,15 @@ public class ParticleFilter {
     private Particle[] _particleSet;
     private int _numParticles;
     private long _currentTime;
+    private NewRandom _randGen;
 
     public static long MEAN_MANEUVER_TIME;
 
-    public ParticleFilter(int numParticles, long startTime, PositionObservation observation) {
+    public ParticleFilter(int numParticles, long startTime, PositionObservation observation, NewRandom randGen) {
         _numParticles = numParticles;
         _currentTime = startTime;
         _particleSet = createParticleSet(numParticles, startTime, observation);
+        _randGen = randGen;
     }
 
     private Particle[] createParticleSet(int numParticles,
@@ -19,17 +21,16 @@ public class ParticleFilter {
                                          PositionObservation observation) {
         Particle[] particles = new Particle[numParticles];
         for (int i = 0; i < numParticles; i++) {
-            particles[i] = new Particle(observation, 1.0 / numParticles, time);
+            particles[i] = new Particle(observation, 1.0 / numParticles, time, _randGen);
         }
         return particles;
     }
 
     public void performMotionModelUpdate(long timePassed) {
         double maneuverChance = poissonTimeIntervalCDF(timePassed, 1 / MEAN_MANEUVER_TIME);
-        NewRandomSingleton randGen = NewRandomSingleton.getInstance();
         for (Particle particle : _particleSet) {
             particle.addCurrentStateToHistory();
-            if (randGen.nextDouble() < maneuverChance) {
+            if (_randGen.nextDouble() < maneuverChance) {
                 particle.maneuver();
             }
             particle.moveForTime(timePassed);
@@ -60,7 +61,7 @@ public class ParticleFilter {
         Particle[] newParticles = new Particle[_particleSet.length];
         ParticleWeightDistribution distribution = new ParticleWeightDistribution(_particleSet);
         for (int i = 0; i < newParticles.length; i++) {
-            Particle sampledParticle = distribution.sampleParticle();
+            Particle sampledParticle = distribution.sampleParticle(_randGen);
             Particle newParticle = new Particle(sampledParticle);
             if (sampledParticle.getWasSampled()) {
                 newParticle.perturb();

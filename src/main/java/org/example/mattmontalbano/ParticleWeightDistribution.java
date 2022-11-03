@@ -1,8 +1,8 @@
 package org.example.mattmontalbano;
 
 public class ParticleWeightDistribution {
-    private double[] _cumulativeWeightArray;
-    private Particle[] _particles;
+    private final double[] _cumulativeWeightArray;
+    private final Particle[] _particles;
 
     public ParticleWeightDistribution(Particle[] particles) {
         _cumulativeWeightArray = createCumulativeWeightArray(particles);
@@ -10,7 +10,7 @@ public class ParticleWeightDistribution {
     }
 
     private double[] createCumulativeWeightArray(Particle[] particles) {
-        double[] cumulativeWeightArray = new double[particles.length - 1];
+        double[] cumulativeWeightArray = new double[particles.length];
         double weightSum = 0;
         for (int i = 0; i < cumulativeWeightArray.length; i++) {
             weightSum += particles[i].getWeight();
@@ -19,8 +19,8 @@ public class ParticleWeightDistribution {
         return cumulativeWeightArray;
     }
 
-    public Particle sampleParticle() {
-        double target = NewRandomSingleton.getInstance().nextDouble() * getTotalWeight();
+    public Particle sampleParticle(NewRandom randGen) {
+        double target = randGen.nextDouble() * getTotalWeight();
         int particleIndex = binarySearch(target);
         return _particles[particleIndex];
     }
