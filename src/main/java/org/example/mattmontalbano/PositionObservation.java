@@ -17,7 +17,7 @@ public class PositionObservation implements Observation {
 
     @Override
     public double computeLikelihood(Particle particle) {
-        double distance = calculateDistance(_x, particle.getState().getX(), _y, particle.getState().getY());
+        double distance = calculateDistance(_x, particle.getX(), _y, particle.getY());
         return _dist.density(distance);
     }
 
@@ -28,22 +28,22 @@ public class PositionObservation implements Observation {
     public static PositionObservation[] createNObservations(TimeStateObject[] trueTargetState,
                                                             double standardDeviation) {
         PositionObservation[] observations = new PositionObservation[trueTargetState.length - 1];
-        NewRandom randGen = NewRandom.getInstance();
+        NewRandomSingleton randGen = NewRandomSingleton.getInstance();
         for (int i = 0; i < observations.length; i++) {
-            State state = trueTargetState[i].getState();
-            double x = state.getX() + randGen.nextDoubleBetween(-standardDeviation, standardDeviation);
-            double y = state.getY() + randGen.nextDoubleBetween(-standardDeviation, standardDeviation);
+            TimeStateObject target = trueTargetState[i];
+            double x = target.getX() + randGen.nextDoubleBetween(-standardDeviation, standardDeviation);
+            double y = target.getY() + randGen.nextDoubleBetween(-standardDeviation, standardDeviation);
             observations[i] = new PositionObservation(x, y, standardDeviation);
         }
         return observations;
     }
 
     public double getX() {
-        return _x + NewRandom.getInstance().nextDoubleBetween(-_standardDeviation, _standardDeviation);
+        return _x + NewRandomSingleton.getInstance().nextDoubleBetween(-_standardDeviation, _standardDeviation);
     }
 
     public double getY() {
-        return _y + NewRandom.getInstance().nextDoubleBetween(-_standardDeviation, _standardDeviation);
+        return _y + NewRandomSingleton.getInstance().nextDoubleBetween(-_standardDeviation, _standardDeviation);
     }
 
     public double getStandardDeviation() {

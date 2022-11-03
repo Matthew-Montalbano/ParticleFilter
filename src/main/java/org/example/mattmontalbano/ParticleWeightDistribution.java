@@ -20,7 +20,7 @@ public class ParticleWeightDistribution {
     }
 
     public Particle sampleParticle() {
-        double target = NewRandom.getInstance().nextDouble() * getTotalWeight();
+        double target = NewRandomSingleton.getInstance().nextDouble() * getTotalWeight();
         int particleIndex = binarySearch(target);
         return _particles[particleIndex];
     }

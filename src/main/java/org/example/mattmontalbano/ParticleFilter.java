@@ -26,7 +26,7 @@ public class ParticleFilter {
 
     public void performMotionModelUpdate(long timePassed) {
         double maneuverChance = poissonTimeIntervalCDF(timePassed, 1 / MEAN_MANEUVER_TIME);
-        NewRandom randGen = NewRandom.getInstance();
+        NewRandomSingleton randGen = NewRandomSingleton.getInstance();
         for (Particle particle : _particleSet) {
             particle.addCurrentStateToHistory();
             if (randGen.nextDouble() < maneuverChance) {

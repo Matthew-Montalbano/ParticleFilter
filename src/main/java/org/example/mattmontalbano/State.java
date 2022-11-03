@@ -2,8 +2,8 @@ package org.example.mattmontalbano;
 
 public class State {
 
-    private double _x;
-    private double _y;
+    protected double _x;
+    protected double _y;
     private double _xVel;
     private double _yVel;
 

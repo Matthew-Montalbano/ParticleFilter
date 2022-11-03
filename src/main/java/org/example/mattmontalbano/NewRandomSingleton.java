@@ -2,17 +2,17 @@ package org.example.mattmontalbano;
 
 import java.util.Random;
 
-public class NewRandom extends Random {
+public class NewRandomSingleton extends Random {
 
-    private static NewRandom _randomInstance = null;
+    private static NewRandomSingleton _randomInstance = null;
 
-    private NewRandom() {
+    private NewRandomSingleton() {
         super();
     }
 
-    public static NewRandom getInstance() {
+    public static NewRandomSingleton getInstance() {
         if (_randomInstance == null) {
-            _randomInstance = new NewRandom();
+            _randomInstance = new NewRandomSingleton();
         }
         return _randomInstance;
     }

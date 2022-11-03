@@ -34,17 +34,17 @@ public class Particle extends TimeStateObject {
     public Particle(PositionObservation observation, double weight, long time) {
         this(observation.getX(),
              observation.getY(),
-             NewRandom.getInstance().nextDoubleBetween(-State.MAX_SPEED, State.MAX_SPEED),
-             NewRandom.getInstance().nextDoubleBetween(-State.MAX_SPEED, State.MAX_SPEED),
+             NewRandomSingleton.getInstance().nextDoubleBetween(-State.MAX_SPEED, State.MAX_SPEED),
+             NewRandomSingleton.getInstance().nextDoubleBetween(-State.MAX_SPEED, State.MAX_SPEED),
              weight,
              time);
     }
 
     public Particle(Particle oldParticle) {
-        this(oldParticle._state.getX(),
-             oldParticle._state.getX(),
-             oldParticle._state.getXVelocity(),
-             oldParticle._state.getYVelocity(),
+        this(oldParticle._x,
+             oldParticle._y,
+             oldParticle.getXVelocity(),
+             oldParticle.getYVelocity(),
              oldParticle._weight,
              oldParticle._time,
              oldParticle._wasSampled,
@@ -52,30 +52,28 @@ public class Particle extends TimeStateObject {
     }
 
     public void perturb() {
-        NewRandom randGen = NewRandom.getInstance();
-        _state.setX(_state.getX() + randGen.nextDoubleBetween(-POSITION_PERTURBATION_AMOUNT,
-                                                              POSITION_PERTURBATION_AMOUNT));
-        _state.setY(_state.getY() + randGen.nextDoubleBetween(-POSITION_PERTURBATION_AMOUNT,
-                                                              POSITION_PERTURBATION_AMOUNT));
-        _state.setXVelocity(_state.getXVelocity() + randGen.nextDoubleBetween(-VELOCITY_PERTURBATION_AMOUNT,
-                                                                              VELOCITY_PERTURBATION_AMOUNT));
-        _state.setYVelocity(_state.getYVelocity() + randGen.nextDoubleBetween(-VELOCITY_PERTURBATION_AMOUNT,
-                                                                              VELOCITY_PERTURBATION_AMOUNT));
+        NewRandomSingleton randGen = NewRandomSingleton.getInstance();
+        _x += randGen.nextDoubleBetween(-POSITION_PERTURBATION_AMOUNT, POSITION_PERTURBATION_AMOUNT);
+        _y += randGen.nextDoubleBetween(-POSITION_PERTURBATION_AMOUNT, POSITION_PERTURBATION_AMOUNT);
+        setXVelocity(getXVelocity() + randGen.nextDoubleBetween(-VELOCITY_PERTURBATION_AMOUNT,
+                                                                VELOCITY_PERTURBATION_AMOUNT));
+        setYVelocity(getYVelocity() + randGen.nextDoubleBetween(-VELOCITY_PERTURBATION_AMOUNT,
+                                                                VELOCITY_PERTURBATION_AMOUNT));
     }
 
     public void maneuver() {
-        NewRandom randGen = NewRandom.getInstance();
-        _state.setXVelocity(_state.getXVelocity() + randGen.nextDoubleBetween(-MANEUVER_AMOUNT, MANEUVER_AMOUNT));
-        _state.setYVelocity(_state.getYVelocity() + randGen.nextDoubleBetween(-MANEUVER_AMOUNT, MANEUVER_AMOUNT));
+        NewRandomSingleton randGen = NewRandomSingleton.getInstance();
+        setXVelocity(getXVelocity() + randGen.nextDoubleBetween(-MANEUVER_AMOUNT, MANEUVER_AMOUNT));
+        setYVelocity(getYVelocity() + randGen.nextDoubleBetween(-MANEUVER_AMOUNT, MANEUVER_AMOUNT));
     }
 
     public void addCurrentStateToHistory() {
-        _history.put(_time, _state);
+        _history.put(_time, new State(_x, _y, getXVelocity(), getYVelocity()));
     }
 
     public void moveForTime(long timePassed) {
-        _state.setX(_state.getX() + _state.getXVelocity() * timePassed);
-        _state.setY(_state.getY() + _state.getYVelocity() * timePassed);
+        _x += getXVelocity() * timePassed;
+        _y += getYVelocity() * timePassed;
         _time += timePassed;
     }
 
