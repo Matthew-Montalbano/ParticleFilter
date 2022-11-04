@@ -1,12 +1,12 @@
 package org.example.mattmontalbano;
 
-import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class NewRandom {
 
-    private final Random _random;
+    private final RandomGenerator _random;
 
-    public NewRandom(Random random) {
+    public NewRandom(RandomGenerator random) {
         _random = random;
     }
 
