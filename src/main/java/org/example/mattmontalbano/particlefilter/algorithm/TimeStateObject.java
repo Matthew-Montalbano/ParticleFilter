@@ -1,4 +1,4 @@
-package org.example.mattmontalbano;
+package org.example.mattmontalbano.particlefilter.algorithm;
 
 public class TimeStateObject extends State {
     protected long _time;

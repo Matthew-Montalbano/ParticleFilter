@@ -1,4 +1,4 @@
-package org.example.mattmontalbano;
+package org.example.mattmontalbano.particlefilter.algorithm;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 

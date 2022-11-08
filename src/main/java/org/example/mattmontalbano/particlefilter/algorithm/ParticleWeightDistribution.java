@@ -1,4 +1,4 @@
-package org.example.mattmontalbano;
+package org.example.mattmontalbano.particlefilter.algorithm;
 
 public class ParticleWeightDistribution {
     private final double[] _cumulativeWeightArray;

@@ -5,14 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="52e400c7-ef28-41cd-85fe-1cbf0c63f755" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/saveactions_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/saveactions_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/NewRandom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/NewRandom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/PositionObservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/PositionObservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/NewRandomTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/NewRandomTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/PositionObservationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/PositionObservationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/NewRandom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/NewRandom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/Observation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/Observation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/Particle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/Particle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/ParticleFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/ParticleWeightDistribution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleWeightDistribution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/PositionObservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/PositionObservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/Scenario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/Scenario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/TimeStateObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/TimeStateObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/NewRandomTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/particlefilter/algorithm/NewRandomTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/ParticleFilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/ParticleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/ParticleWeightDistributionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleWeightDistributionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/PositionObservationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/particlefilter/algorithm/PositionObservationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/StateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/particlefilter/algorithm/StateTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,20 +45,39 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Matthew Montalbano/Documents/ParticleFilter",
-    "project.structure.last.edited": "Project",
+    "last_opened_file_path": "C:/Users/Matthew Montalbano/Downloads/rest-api/rest-api",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.sourceCode.Java"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.example.mattmontalbano.particlefilter.api" />
+      <recent name="org.example.mattmontalbano" />
+    </key>
+  </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PositionObservationTest">
-    <configuration name="NewRandomTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.ParticleFilterApplication">
+    <configuration name="ParticleFilterApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.mattmontalbano.particlefilter.api.ParticleFilterApplication" />
+      <module name="particle-filter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.mattmontalbano.particlefilter.api.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NewRandomTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="particle-filter" />
       <extension name="coverage">
         <pattern>
@@ -63,30 +92,44 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PositionObservationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NewRandomTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="particle-filter" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.mattmontalbano.*" />
+          <option name="PATTERN" value="org.example.mattmontalbano.particlefilter.algorithm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.example.mattmontalbano" />
-      <option name="MAIN_CLASS_NAME" value="org.example.mattmontalbano.PositionObservationTest" />
+      <option name="PACKAGE_NAME" value="org.example.mattmontalbano.particlefilter.algorithm" />
+      <option name="MAIN_CLASS_NAME" value="org.example.mattmontalbano.particlefilter.algorithm.NewRandomTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="org.example.mattmontalbano in particle-filter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="org.example.mattmontalbano.particlefilter in particle-filter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="particle-filter" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.mattmontalbano.*" />
+          <option name="PATTERN" value="org.example.mattmontalbano.particlefilter.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.example.mattmontalbano" />
+      <option name="PACKAGE_NAME" value="org.example.mattmontalbano.particlefilter" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="org.example.mattmontalbano.particlefilter.algorithm in particle-filter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="particle-filter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.mattmontalbano.particlefilter.algorithm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.mattmontalbano.particlefilter.algorithm" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -94,9 +137,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PositionObservationTest" />
-        <item itemvalue="JUnit.org.example.mattmontalbano in particle-filter" />
+        <item itemvalue="Application.ParticleFilterApplication" />
+        <item itemvalue="JUnit.org.example.mattmontalbano.particlefilter in particle-filter" />
+        <item itemvalue="JUnit.NewRandomTest (1)" />
         <item itemvalue="JUnit.NewRandomTest" />
+        <item itemvalue="JUnit.org.example.mattmontalbano.particlefilter.algorithm in particle-filter" />
       </list>
     </recent_temporary>
   </component>
