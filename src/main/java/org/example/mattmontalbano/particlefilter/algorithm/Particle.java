@@ -1,9 +1,13 @@
 package org.example.mattmontalbano.particlefilter.algorithm;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Particle extends TimeStateObject {
+
+    private double _maxSpeed;
     private double _weight;
     private boolean _wasSampled;
     private final Map<Long, State> _history;
@@ -17,31 +21,32 @@ public class Particle extends TimeStateObject {
                     double y,
                     double xVel,
                     double yVel,
+                    double maxSpeed,
                     double weight,
                     long time,
                     boolean wasSampled,
                     Map<Long, State> history,
                     NewRandom randGen) {
         super(x, y, xVel, yVel, time);
+        _maxSpeed = maxSpeed;
         _weight = weight;
         _time = time;
         _wasSampled = wasSampled;
         _history = history;
         _randGen = randGen;
+        setXVelocity(xVel);
+        setYVelocity(yVel);
     }
 
-    public Particle(double x, double y, double xVel, double yVel, double weight, long time, NewRandom randGen) {
-        this(x, y, xVel, yVel, weight, time, false, new HashMap<>(), randGen);
-    }
-
-    public Particle(PositionObservation observation, double weight, long time, NewRandom randGen) {
-        this(observation.getX(),
-             observation.getY(),
-             randGen.nextDoubleBetween(-State.MAX_SPEED, State.MAX_SPEED),
-             randGen.nextDoubleBetween(-State.MAX_SPEED, State.MAX_SPEED),
-             weight,
-             time,
-             randGen);
+    public Particle(double x,
+                    double y,
+                    double xVel,
+                    double yVel,
+                    double maxSpeed,
+                    double weight,
+                    long time,
+                    NewRandom randGen) {
+        this(x, y, xVel, yVel, maxSpeed, weight, time, false, new HashMap<>(), randGen);
     }
 
     public Particle(Particle oldParticle) {
@@ -49,6 +54,7 @@ public class Particle extends TimeStateObject {
              oldParticle._y,
              oldParticle.getXVelocity(),
              oldParticle.getYVelocity(),
+             oldParticle._maxSpeed,
              oldParticle._weight,
              oldParticle._time,
              oldParticle._wasSampled,
@@ -94,5 +100,25 @@ public class Particle extends TimeStateObject {
 
     public void setWasSampled(boolean wasSampled) {
         _wasSampled = wasSampled;
+    }
+
+    @Override
+    public void setXVelocity(double xVel) {
+        _xVel = enforceSpeedBounds(xVel);
+    }
+
+    @Override
+    public void setYVelocity(double yVel) {
+        _yVel = enforceSpeedBounds(yVel);
+    }
+
+    private double enforceSpeedBounds(double speed) {
+        if (speed < -_maxSpeed) {
+            return -_maxSpeed;
+        } else if (speed > _maxSpeed) {
+            return _maxSpeed;
+        } else {
+            return speed;
+        }
     }
 }

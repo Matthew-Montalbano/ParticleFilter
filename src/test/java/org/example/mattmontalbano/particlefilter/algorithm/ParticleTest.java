@@ -22,7 +22,7 @@ public class ParticleTest {
 
         @BeforeEach
         public void init() {
-            _particle = new Particle(5, -3, 2, -4, 0, 0, false, new HashMap<>(), new NewRandom(new Random()));
+            _particle = new Particle(5, -3, 2, -4, 10, 0, 0, false, new HashMap<>(), new NewRandom(new Random()));
             _timePassed = 10;
         }
 
@@ -55,7 +55,7 @@ public class ParticleTest {
             NewRandom randGen = mock(NewRandom.class);
             when(randGen.nextDoubleBetween(anyDouble(), anyDouble())).thenReturn(0.2);
             int x = 5;
-            Particle particle = new Particle(x, -3, 2, -4, 0, 0, false, new HashMap<>(), randGen);
+            Particle particle = new Particle(x, -3, 2, -4, 10, 0, 0, false, new HashMap<>(), randGen);
 
             particle.perturb();
 
@@ -67,7 +67,7 @@ public class ParticleTest {
             NewRandom randGen = mock(NewRandom.class);
             when(randGen.nextDoubleBetween(anyDouble(), anyDouble())).thenReturn(0.2);
             int y = -3;
-            Particle particle = new Particle(5, y, 2, -4, 0, 0, false, new HashMap<>(), randGen);
+            Particle particle = new Particle(5, y, 2, -4, 10, 0, 0, false, new HashMap<>(), randGen);
 
             particle.perturb();
 
@@ -79,7 +79,7 @@ public class ParticleTest {
             NewRandom randGen = mock(NewRandom.class);
             when(randGen.nextDoubleBetween(anyDouble(), anyDouble())).thenReturn(0.2);
             int xVel = 2;
-            Particle particle = new Particle(5, -3, xVel, -4, 0, 0, false, new HashMap<>(), randGen);
+            Particle particle = new Particle(5, -3, xVel, -4, 10, 0, 0, false, new HashMap<>(), randGen);
 
             particle.perturb();
 
@@ -91,7 +91,7 @@ public class ParticleTest {
             NewRandom randGen = mock(NewRandom.class);
             when(randGen.nextDoubleBetween(anyDouble(), anyDouble())).thenReturn(0.2);
             int yVel = -4;
-            Particle particle = new Particle(5, -3, 2, yVel, 0, 0, false, new HashMap<>(), randGen);
+            Particle particle = new Particle(5, -3, 2, yVel, 10, 0, 0, false, new HashMap<>(), randGen);
 
             particle.perturb();
 
@@ -103,7 +103,7 @@ public class ParticleTest {
             NewRandom randGen = mock(NewRandom.class);
             when(randGen.nextDoubleBetween(anyDouble(), anyDouble())).thenReturn(0.0);
             int x = 5;
-            Particle particle = new Particle(x, -3, 2, -4, 0, 0, false, new HashMap<>(), randGen);
+            Particle particle = new Particle(x, -3, 2, -4, 10, 0, 0, false, new HashMap<>(), randGen);
 
             particle.perturb();
 
@@ -115,7 +115,7 @@ public class ParticleTest {
             NewRandom randGen = mock(NewRandom.class);
             when(randGen.nextDoubleBetween(anyDouble(), anyDouble())).thenReturn(0.0);
             int y = -3;
-            Particle particle = new Particle(5, y, 2, -4, 0, 0, false, new HashMap<>(), randGen);
+            Particle particle = new Particle(5, y, 2, -4, 10, 0, 0, false, new HashMap<>(), randGen);
 
             particle.perturb();
 
@@ -127,7 +127,7 @@ public class ParticleTest {
             NewRandom randGen = mock(NewRandom.class);
             when(randGen.nextDoubleBetween(anyDouble(), anyDouble())).thenReturn(0.0);
             int xVel = 2;
-            Particle particle = new Particle(5, -3, xVel, -4, 0, 0, false, new HashMap<>(), randGen);
+            Particle particle = new Particle(5, -3, xVel, -4, 10, 0, 0, false, new HashMap<>(), randGen);
 
             particle.perturb();
 
@@ -139,11 +139,60 @@ public class ParticleTest {
             NewRandom randGen = mock(NewRandom.class);
             when(randGen.nextDoubleBetween(anyDouble(), anyDouble())).thenReturn(0.0);
             int yVel = -4;
-            Particle particle = new Particle(5, -3, 2, yVel, 0, 0, false, new HashMap<>(), randGen);
+            Particle particle = new Particle(5, -3, 2, yVel, 10, 0, 0, false, new HashMap<>(), randGen);
 
             particle.perturb();
 
             assertEquals(yVel, particle.getYVelocity());
+        }
+    }
+
+    @Nested
+    class setVelocityTest {
+        double _maxSpeed;
+
+        Particle _particle;
+
+        @BeforeEach
+        public void init() {
+            _maxSpeed = 10;
+            _particle = new Particle(5,
+                                     -3,
+                                     2,
+                                     -4,
+                                     _maxSpeed,
+                                     0,
+                                     0,
+                                     false,
+                                     new HashMap<>(),
+                                     new NewRandom(new Random()));
+        }
+
+        @Test
+        public void givenNumberLessThanMaxSpeed_whenSetVelocity_returnSameNumber() {
+            double newVelocity = _maxSpeed * 0.5;
+
+            _particle.setXVelocity(newVelocity);
+
+            assertEquals(_particle.getXVelocity(), newVelocity);
+        }
+
+        @Test
+        public void givenNumberGreaterThanMaxSpeed_whenSetVelocity_returnMaxSpeed() {
+            double newVelocity = _maxSpeed + 1;
+
+            _particle.setXVelocity(newVelocity);
+
+            assertEquals(_particle.getXVelocity(), _maxSpeed);
+        }
+
+        @Test
+        public void givenBiggerNegativeNumberThanNegativeMaxSpeed_whenSetVelocity_returnNegativeMaxSpeed() {
+            double newVelocity = -_maxSpeed - 1;
+
+            _particle.setXVelocity(newVelocity);
+
+            assertEquals(_particle.getXVelocity(), -_maxSpeed);
         }
     }
 }

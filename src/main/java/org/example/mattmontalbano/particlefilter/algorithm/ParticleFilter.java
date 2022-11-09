@@ -3,35 +3,26 @@ package org.example.mattmontalbano.particlefilter.algorithm;
 public class ParticleFilter {
 
     private Particle[] _particleSet;
-    private int _numParticles;
     private long _currentTime;
+    private long _meanManeuverTime;
     private NewRandom _randGen;
 
-    public static long MEAN_MANEUVER_TIME = 10;
-
-    public ParticleFilter(int numParticles, long startTime, PositionObservation observation, NewRandom randGen) {
-        _numParticles = numParticles;
+    public ParticleFilter(Particle[] particleSet,
+                          long startTime,
+                          long meanManeuverTime,
+                          NewRandom randGen) {
         _currentTime = startTime;
+        _particleSet = particleSet;
+        _meanManeuverTime = meanManeuverTime;
         _randGen = randGen;
-        _particleSet = createParticleSet(numParticles, startTime, observation, randGen);
-    }
-
-    private Particle[] createParticleSet(int numParticles,
-                                         long time,
-                                         PositionObservation observation,
-                                         NewRandom randGen) {
-        Particle[] particles = new Particle[numParticles];
-        for (int i = 0; i < numParticles; i++) {
-            particles[i] = new Particle(observation, 1.0 / numParticles, time, randGen);
-        }
-        return particles;
+        resetParticleWeights();
     }
 
     public void performMotionModelUpdate(long timePassed) {
         if (timePassed <= 0) {
             return;
         }
-        double maneuverChance = poissonTimeIntervalCDF(timePassed, 1 / MEAN_MANEUVER_TIME);
+        double maneuverChance = _meanManeuverTime == 0 ? 1 : poissonTimeIntervalCDF(timePassed, 1 / _meanManeuverTime);
         for (Particle particle : _particleSet) {
             particle.addCurrentStateToHistory();
             if (_randGen.nextDouble() < maneuverChance) {
