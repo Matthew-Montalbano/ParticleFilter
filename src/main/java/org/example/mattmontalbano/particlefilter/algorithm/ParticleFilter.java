@@ -3,16 +3,19 @@ package org.example.mattmontalbano.particlefilter.algorithm;
 public class ParticleFilter {
 
     private Particle[] _particleSet;
+    private final Scenario _scenario;
     private long _currentTime;
     private long _meanManeuverTime;
     private NewRandom _randGen;
 
     public ParticleFilter(Particle[] particleSet,
+                          Scenario scenario,
                           long startTime,
                           long meanManeuverTime,
                           NewRandom randGen) {
         _currentTime = startTime;
         _particleSet = particleSet;
+        _scenario = scenario;
         _meanManeuverTime = meanManeuverTime;
         _randGen = randGen;
         resetParticleWeights();

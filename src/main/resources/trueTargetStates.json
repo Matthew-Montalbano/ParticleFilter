@@ -1,0 +1,46 @@
+{
+  "scenarios": [
+    {
+      "id": "default",
+      "trueTargetStates": [
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 0
+        },
+        {
+          "x": 5.0,
+          "y": 5.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 5
+        },
+        {
+          "x": 10.0,
+          "y": 10.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 10
+        },
+        {
+          "x": 15.0,
+          "y": 15.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 15
+        },
+        {
+          "x": 20.0,
+          "y": 20.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 20
+        }
+      ],
+      "standardDeviation": 3.0,
+      "seed": 100
+    }
+  ]
+}
