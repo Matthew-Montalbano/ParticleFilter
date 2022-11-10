@@ -52,6 +52,11 @@ public class PositionObservation implements Observation {
         return _y + _randGen.nextDoubleBetween(-_standardDeviation, _standardDeviation);
     }
 
+    @Override
+    public long getTime() {
+        return _time;
+    }
+
     public double getStandardDeviation() {
         return _standardDeviation;
     }

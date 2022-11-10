@@ -31,18 +31,17 @@ public class ParticleFilterService {
                                                                                     randGen);
         Scenario scenario = new Scenario(scenarioModel.trueTargetStates(), observations);
 
-        long startTime = 0;
+        long startTime = observations[0].getTime();
         Particle[] startingParticles = ParticleSetGenerator.createParticlesAroundObservation(observations[0],
                                                                                              request.numParticles(),
                                                                                              startTime,
                                                                                              request.maxSpeed(),
                                                                                              randGen);
-        ParticleFilter particleFilter = new ParticleFilter(startingParticles,
-                                                           scenario,
-                                                           startTime,
-                                                           request.meanManeuverTime(),
-                                                           randGen);
-        ParticleFilterModel particleFilterModel = new ParticleFilterModel(particleFilterId, particleFilter);
+        ParticleFilter particleFilter = new ParticleFilter(startingParticles, request.meanManeuverTime(), randGen);
+
+        ParticleFilterRunner particleFilterRunner = new ParticleFilterRunner(particleFilter, scenario);
+
+        ParticleFilterModel particleFilterModel = new ParticleFilterModel(particleFilterId, particleFilterRunner);
 
         return _particleFilterRepository.create(particleFilterModel);
     }

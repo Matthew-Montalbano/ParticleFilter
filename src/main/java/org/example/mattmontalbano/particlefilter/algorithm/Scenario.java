@@ -3,10 +3,10 @@ package org.example.mattmontalbano.particlefilter.algorithm;
 public class Scenario {
 
     private final TimeStateObject[] _trueTargetState;
-    private final PositionObservation[] _observations;
+    private final Observation[] _observations;
 
     public Scenario(TimeStateObject[] trueTargetState,
-                    PositionObservation[] observations) {
+                    Observation[] observations) {
 
         _trueTargetState = trueTargetState;
         _observations = observations;
@@ -16,7 +16,7 @@ public class Scenario {
         return _trueTargetState;
     }
 
-    public PositionObservation[] getObservations() {
+    public Observation[] getObservations() {
         return _observations;
     }
 

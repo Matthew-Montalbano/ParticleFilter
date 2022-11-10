@@ -13,10 +13,8 @@ import static org.mockito.Mockito.*;
 public class ParticleFilterTest {
 
     private final NewRandom _randGen = new NewRandom(new Random(100));
-    private final Scenario _scenarioMock = mock(Scenario.class);
     private final int _numParticles = 10;
     private final long _meanManeuverTime = 10;
-    private final long _startTime = 0;
     private Particle[] _oldParticles;
     private Particle[] _particleSpies;
     private ParticleFilter _particleFilter;
@@ -32,11 +30,7 @@ public class ParticleFilterTest {
 
         @Test
         public void givenPositiveTimePassed_whenPerformMotionModelUpdate_allParticlesTimeUpdated() {
-            _particleFilter = new ParticleFilter(_particleSpies,
-                                                 _scenarioMock,
-                                                 _startTime,
-                                                 _meanManeuverTime,
-                                                 _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, _meanManeuverTime, _randGen);
             _oldParticles = Arrays.stream(_particleFilter.getParticleSet())
                                   .map(Particle::new)
                                   .toArray(Particle[]::new);
@@ -51,11 +45,7 @@ public class ParticleFilterTest {
 
         @Test
         public void givenPositiveTimePassed_whenPerformMotionModelUpdate_allParticlesXUpdated() {
-            _particleFilter = new ParticleFilter(_particleSpies,
-                                                 _scenarioMock,
-                                                 _startTime,
-                                                 _meanManeuverTime,
-                                                 _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, _meanManeuverTime, _randGen);
             _oldParticles = Arrays.stream(_particleFilter.getParticleSet())
                                   .map(Particle::new)
                                   .toArray(Particle[]::new);
@@ -70,11 +60,7 @@ public class ParticleFilterTest {
 
         @Test
         public void givenPositiveTimePassed_whenPerformMotionModelUpdate_allParticlesYUpdated() {
-            _particleFilter = new ParticleFilter(_particleSpies,
-                                                 _scenarioMock,
-                                                 _startTime,
-                                                 _meanManeuverTime,
-                                                 _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, _meanManeuverTime, _randGen);
             _oldParticles = Arrays.stream(_particleFilter.getParticleSet())
                                   .map(Particle::new)
                                   .toArray(Particle[]::new);
@@ -89,11 +75,7 @@ public class ParticleFilterTest {
 
         @Test
         public void givenNegativeTimePassed_whenPerformMotionModelUpdate_allParticlesTimeSame() {
-            _particleFilter = new ParticleFilter(_particleSpies,
-                                                 _scenarioMock,
-                                                 _startTime,
-                                                 _meanManeuverTime,
-                                                 _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, _meanManeuverTime, _randGen);
             _oldParticles = Arrays.stream(_particleFilter.getParticleSet())
                                   .map(Particle::new)
                                   .toArray(Particle[]::new);
@@ -108,11 +90,7 @@ public class ParticleFilterTest {
 
         @Test
         public void givenNegativeTimePassed_whenPerformMotionModelUpdate_allParticlesXSame() {
-            _particleFilter = new ParticleFilter(_particleSpies,
-                                                 _scenarioMock,
-                                                 _startTime,
-                                                 _meanManeuverTime,
-                                                 _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, _meanManeuverTime, _randGen);
             _oldParticles = Arrays.stream(_particleFilter.getParticleSet())
                                   .map(Particle::new)
                                   .toArray(Particle[]::new);
@@ -127,11 +105,7 @@ public class ParticleFilterTest {
 
         @Test
         public void givenNegativeTimePassed_whenPerformMotionModelUpdate_allParticlesYSame() {
-            _particleFilter = new ParticleFilter(_particleSpies,
-                                                 _scenarioMock,
-                                                 _startTime,
-                                                 _meanManeuverTime,
-                                                 _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, _meanManeuverTime, _randGen);
             _oldParticles = Arrays.stream(_particleFilter.getParticleSet())
                                   .map(Particle::new)
                                   .toArray(Particle[]::new);
@@ -146,11 +120,7 @@ public class ParticleFilterTest {
 
         @Test
         public void givenZeroTimePassed_whenPerformMotionModelUpdate_allParticlesTimeSame() {
-            _particleFilter = new ParticleFilter(_particleSpies,
-                                                 _scenarioMock,
-                                                 _startTime,
-                                                 _meanManeuverTime,
-                                                 _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, _meanManeuverTime, _randGen);
             _oldParticles = Arrays.stream(_particleFilter.getParticleSet())
                                   .map(Particle::new)
                                   .toArray(Particle[]::new);
@@ -165,11 +135,7 @@ public class ParticleFilterTest {
 
         @Test
         public void givenZeroTimePassed_whenPerformMotionModelUpdate_allParticlesXSame() {
-            _particleFilter = new ParticleFilter(_particleSpies,
-                                                 _scenarioMock,
-                                                 _startTime,
-                                                 _meanManeuverTime,
-                                                 _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, _meanManeuverTime, _randGen);
             _oldParticles = Arrays.stream(_particleFilter.getParticleSet())
                                   .map(Particle::new)
                                   .toArray(Particle[]::new);
@@ -184,11 +150,7 @@ public class ParticleFilterTest {
 
         @Test
         public void givenZeroTimePassed_whenPerformMotionModelUpdate_allParticlesYSame() {
-            _particleFilter = new ParticleFilter(_particleSpies,
-                                                 _scenarioMock,
-                                                 _startTime,
-                                                 _meanManeuverTime,
-                                                 _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, _meanManeuverTime, _randGen);
             _oldParticles = Arrays.stream(_particleFilter.getParticleSet())
                                   .map(Particle::new)
                                   .toArray(Particle[]::new);
@@ -204,7 +166,7 @@ public class ParticleFilterTest {
         @Test
         public void givenZeroMeanManeuverTime_whenPerformMotionModelUpdate_thenEveryParticleManeuver() {
             long meanManeuverTime = 0;
-            _particleFilter = new ParticleFilter(_particleSpies, _scenarioMock, _startTime, meanManeuverTime, _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, meanManeuverTime, _randGen);
 
             _particleFilter.performMotionModelUpdate(10);
 
@@ -216,7 +178,7 @@ public class ParticleFilterTest {
         @Test
         public void givenInfiniteMeanManeuverTime_whenPerformMotionModelUpdate_thenNoParticleManeuver() {
             long meanManeuverTime = Long.MAX_VALUE;
-            _particleFilter = new ParticleFilter(_particleSpies, _scenarioMock, _startTime, meanManeuverTime, _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, meanManeuverTime, _randGen);
 
             _particleFilter.performMotionModelUpdate(10);
 
@@ -231,11 +193,7 @@ public class ParticleFilterTest {
 
         @Test
         public void givenObservation_whenWeightParticlesAgainstObservation_thenAllWeightsSumToOne() {
-            _particleFilter = new ParticleFilter(_particleSpies,
-                                                 _scenarioMock,
-                                                 _startTime,
-                                                 _meanManeuverTime,
-                                                 _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, _meanManeuverTime, _randGen);
             PositionObservation observationSpy = spy(new PositionObservation(2, 5, 2, 0, _randGen));
 
             _particleFilter.weightParticlesAgainstObservation(observationSpy);
@@ -259,11 +217,7 @@ public class ParticleFilterTest {
 
         @BeforeEach
         public void init() {
-            _particleFilter = new ParticleFilter(_particleSpies,
-                                                 _scenarioMock,
-                                                 _startTime,
-                                                 _meanManeuverTime,
-                                                 _randGen);
+            _particleFilter = new ParticleFilter(_particleSpies, _meanManeuverTime, _randGen);
         }
 
         @Test

@@ -4,4 +4,6 @@ public interface Observation {
 
     double computeLikelihood(Particle particle);
 
+    long getTime();
+
 }
