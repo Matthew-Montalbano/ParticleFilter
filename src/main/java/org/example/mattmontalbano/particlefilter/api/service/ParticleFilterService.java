@@ -3,6 +3,7 @@ package org.example.mattmontalbano.particlefilter.api.service;
 import org.example.mattmontalbano.particlefilter.algorithm.*;
 import org.example.mattmontalbano.particlefilter.api.model.CreateParticleFilterRequest;
 import org.example.mattmontalbano.particlefilter.api.model.ParticleFilterModel;
+import org.example.mattmontalbano.particlefilter.api.model.ProcessNextObservationResponse;
 import org.example.mattmontalbano.particlefilter.api.model.ScenarioModel;
 import org.example.mattmontalbano.particlefilter.api.repository.ParticleFilterRepository;
 import org.example.mattmontalbano.particlefilter.api.repository.ScenarioRepository;
@@ -23,7 +24,7 @@ public class ParticleFilterService {
         this._scenarioRepository = scenarioRepository;
     }
 
-    public ParticleFilterModel create(String particleFilterId, CreateParticleFilterRequest request) {
+    public Particle[] create(String particleFilterId, CreateParticleFilterRequest request) {
         ScenarioModel scenarioModel = _scenarioRepository.findById(request.scenarioId());
         NewRandom randGen = new NewRandom(new Random(scenarioModel.seed()));
         PositionObservation[] observations = PositionObservation.createObservations(scenarioModel.trueTargetStates(),
@@ -43,13 +44,24 @@ public class ParticleFilterService {
 
         ParticleFilterModel particleFilterModel = new ParticleFilterModel(particleFilterId, particleFilterRunner);
 
-        return _particleFilterRepository.create(particleFilterModel);
+        _particleFilterRepository.create(particleFilterModel);
+
+        return startingParticles;
     }
 
-    public ParticleFilterModel runParticleFilterOverNextObservation(String id) {
-        ParticleFilterModel particleFilterModel = _particleFilterRepository.findById(id);
-        // TODO: Run particle filter over the next observation
-        return particleFilterModel;
+    public Particle[] updateParticleFilterTime(String particleFilterId, long time) {
+        ParticleFilterModel particleFilterModel = _particleFilterRepository.findById(particleFilterId);
+        particleFilterModel.particleFilterRunner().updateTime(time);
+        return particleFilterModel.particleFilterRunner().getParticleFilter().getParticleSet();
+    }
+
+    public ProcessNextObservationResponse processNextObservation(String particleFilterId) {
+        ParticleFilterModel particleFilterModel = _particleFilterRepository.findById(particleFilterId);
+        particleFilterModel.particleFilterRunner().processNextObservation();
+        ParticleFilterRunner particleFilterRunner = particleFilterModel.particleFilterRunner();
+        return new ProcessNextObservationResponse(particleFilterRunner.getCurrentTime(),
+                                                  particleFilterRunner.getParticleFilter()
+                                                                      .getParticleSet());
     }
 
 }

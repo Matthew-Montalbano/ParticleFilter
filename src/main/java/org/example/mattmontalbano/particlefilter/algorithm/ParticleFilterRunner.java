@@ -14,17 +14,28 @@ public class ParticleFilterRunner {
         _currentObservationIndex = 0;
     }
 
+    public boolean processNextObservation() {
+        if (_currentObservationIndex >= _scenario.getObservations().length - 1) {
+            return false;
+        }
+        Observation observation = _scenario.getObservations()[_currentObservationIndex + 1];
+        long prevObservationTime = _scenario.getObservations()[_currentObservationIndex].getTime();
+        long currObservationTime = observation.getTime();
+        long timeSinceLastObservation = currObservationTime - prevObservationTime;
+        runObservationThroughParticleFilter(observation, timeSinceLastObservation);
+        _currentObservationIndex += 1;
+        _currentTime = currObservationTime;
+        return true;
+    }
+
     public void updateTime(long newTime) {
         if (newTime < _currentTime) {
             return;
         }
         int latestObservationIndex = getLatestObservationIndex(newTime);
-        for (int i = _currentObservationIndex + 1; i <= latestObservationIndex; i++) {
-            Observation observation = _scenario.getObservations()[i];
-            runObservationThroughParticleFilter(observation);
-            _currentTime = observation.getTime();
-        }
+        runObservationsThroughParticleFilter(_currentObservationIndex + 1, latestObservationIndex);
         _currentObservationIndex = latestObservationIndex;
+        _currentTime = newTime;
     }
 
     // Get index of Observation whose time is the largest time smaller than the time parameter
@@ -43,10 +54,21 @@ public class ParticleFilterRunner {
         return low - 1;
     }
 
-    private void runObservationThroughParticleFilter(Observation observation) {
+    private void runObservationsThroughParticleFilter(int firstObservationIndex, int lastObservationIndex) {
+        long prevObservationTime = _scenario.getObservations()[firstObservationIndex - 1].getTime();
+        for (int i = firstObservationIndex; i <= lastObservationIndex; i++) {
+            Observation observation = _scenario.getObservations()[i];
+            long currObservationTime = observation.getTime();
+            long timeSinceLastObservation = currObservationTime - prevObservationTime;
+            runObservationThroughParticleFilter(observation, timeSinceLastObservation);
+            prevObservationTime = currObservationTime;
+        }
+    }
+
+    private void runObservationThroughParticleFilter(Observation observation, long timeSinceLastObservation) {
+        _particleFilter.performMotionModelUpdate(timeSinceLastObservation);
         _particleFilter.weightParticlesAgainstObservation(observation);
         _particleFilter.resample();
-        _particleFilter.performMotionModelUpdate(observation.getTime() - _currentTime);
     }
 
     public ParticleFilter getParticleFilter() {

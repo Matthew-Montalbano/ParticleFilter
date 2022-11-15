@@ -5,16 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="52e400c7-ef28-41cd-85fe-1cbf0c63f755" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilterRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilterRunnerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/api/model/ProcessNextObservationResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/Observation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/Observation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/PositionObservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/PositionObservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/Scenario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/Scenario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilterRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilterRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/api/controller/ParticleFilterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/api/controller/ParticleFilterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/api/controller/ScenarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/api/controller/ScenarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/api/model/CreateParticleFilterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/api/model/CreateParticleFilterRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/api/model/ParticleFilterModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/api/model/ParticleFilterModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/api/service/ParticleFilterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/mattmontalbano/particlefilter/api/service/ParticleFilterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilterRunnerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/mattmontalbano/particlefilter/algorithm/ParticleFilterRunnerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +61,7 @@
       <command value="mvn clean install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.org.example.mattmontalbano.particlefilter in particle-filter">
+  <component name="RunManager" selected="Application.ParticleFilterApplication">
     <configuration name="ParticleFilterApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.mattmontalbano.particlefilter.api.ParticleFilterApplication" />
       <module name="particle-filter" />
@@ -99,21 +98,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ParticleFilterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="particle-filter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.mattmontalbano.particlefilter.algorithm.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.mattmontalbano.particlefilter.algorithm" />
-      <option name="MAIN_CLASS_NAME" value="org.example.mattmontalbano.particlefilter.algorithm.ParticleFilterTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="org.example.mattmontalbano.particlefilter in particle-filter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="particle-filter" />
       <extension name="coverage">
@@ -128,13 +112,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="org.example.mattmontalbano.particlefilter.algorithm in particle-filter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="particle-filter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.mattmontalbano.particlefilter.algorithm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.mattmontalbano.particlefilter.algorithm" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.org.example.mattmontalbano.particlefilter in particle-filter" />
-        <item itemvalue="JUnit.ParticleFilterRunnerTest" />
         <item itemvalue="Application.ParticleFilterApplication" />
         <item itemvalue="JUnit.All in particle-filter" />
-        <item itemvalue="JUnit.ParticleFilterTest" />
+        <item itemvalue="JUnit.org.example.mattmontalbano.particlefilter.algorithm in particle-filter" />
+        <item itemvalue="JUnit.org.example.mattmontalbano.particlefilter in particle-filter" />
+        <item itemvalue="JUnit.ParticleFilterRunnerTest" />
       </list>
     </recent_temporary>
   </component>

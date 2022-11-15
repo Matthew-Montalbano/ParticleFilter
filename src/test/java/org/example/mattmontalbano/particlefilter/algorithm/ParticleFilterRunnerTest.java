@@ -3,6 +3,7 @@ package org.example.mattmontalbano.particlefilter.algorithm;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class ParticleFilterRunnerTest {
@@ -67,6 +68,27 @@ public class ParticleFilterRunnerTest {
         _particleFilterRunner.updateTime(updateTime);
 
         verifyNoInteractions(_particleFilter);
+    }
+
+    @Test
+    public void givenAllObservationsProcessed_whenProcessNextObservation_thenParticleFilterCycleRunsOnce() {
+        boolean observationWasProcessed = _particleFilterRunner.processNextObservation();
+
+        verify(_particleFilter, times(1)).weightParticlesAgainstObservation(_scenario.getObservations()[1]);
+        verify(_particleFilter, times(1)).resample();
+        verify(_particleFilter, times(1)).performMotionModelUpdate(anyLong());
+        assertTrue(observationWasProcessed);
+    }
+
+    @Test
+    public void givenAllObservationsProcessed_whenProcessNextObservation_thenParticleFilterCycleDoesNotRun() {
+        for (int i = 0; i < _scenario.getObservations().length - 1; i++) {
+            _particleFilterRunner.processNextObservation();
+        }
+
+        boolean observationWasProcessed = _particleFilterRunner.processNextObservation();
+
+        assertFalse(observationWasProcessed);
     }
 
     private Observation[] generateObservationMocksWithTimes(long[] times) {
