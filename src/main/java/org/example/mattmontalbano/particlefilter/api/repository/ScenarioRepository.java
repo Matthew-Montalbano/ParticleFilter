@@ -43,7 +43,7 @@ public class ScenarioRepository {
     private void loadDefaultScenariosFromJSON() {
         JSONParser parser = new JSONParser();
         try (FileReader reader = new FileReader(
-                "C:\\Users\\Matthew Montalbano\\Documents\\ParticleFilter\\src\\main\\resources\\trueTargetStates.json")) {
+                "C:\\Users\\Matthew Montalbano\\Documents\\ParticleFilter\\src\\main\\resources\\scenarios.json")) {
             Object obj = parser.parse(reader);
             JSONArray scenarios = (JSONArray) ((JSONObject) obj).get("scenarios");
             for (Object scenario : scenarios) {

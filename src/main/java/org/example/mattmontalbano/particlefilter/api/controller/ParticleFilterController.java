@@ -2,13 +2,12 @@ package org.example.mattmontalbano.particlefilter.api.controller;
 
 import org.example.mattmontalbano.particlefilter.algorithm.Particle;
 import org.example.mattmontalbano.particlefilter.api.model.CreateParticleFilterRequest;
-import org.example.mattmontalbano.particlefilter.api.model.ParticleFilterModel;
-import org.example.mattmontalbano.particlefilter.api.model.ProcessNextObservationResponse;
+import org.example.mattmontalbano.particlefilter.api.model.IDRequest;
+import org.example.mattmontalbano.particlefilter.api.model.ParticleFilterProcessingResponse;
 import org.example.mattmontalbano.particlefilter.api.service.ParticleFilterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -24,14 +23,13 @@ public class ParticleFilterController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Particle[] createParticleFilter(@RequestBody CreateParticleFilterRequest request,
-                                           HttpSession session) {
-        return particleFilterService.create(session.getId(), request);
+    public ParticleFilterProcessingResponse createParticleFilter(@RequestBody CreateParticleFilterRequest request) {
+        return particleFilterService.create(request);
     }
 
     @PostMapping("/processNextObservation")
-    public ProcessNextObservationResponse processNextObservation(HttpSession session) {
-        return particleFilterService.processNextObservation(session.getId());
+    public ParticleFilterProcessingResponse processNextObservation(@RequestBody IDRequest id) {
+        return particleFilterService.processNextObservation(id.id());
     }
 
     @PostMapping("/updateTime")

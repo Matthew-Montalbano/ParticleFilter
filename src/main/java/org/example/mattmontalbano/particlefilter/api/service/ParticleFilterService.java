@@ -3,13 +3,14 @@ package org.example.mattmontalbano.particlefilter.api.service;
 import org.example.mattmontalbano.particlefilter.algorithm.*;
 import org.example.mattmontalbano.particlefilter.api.model.CreateParticleFilterRequest;
 import org.example.mattmontalbano.particlefilter.api.model.ParticleFilterModel;
-import org.example.mattmontalbano.particlefilter.api.model.ProcessNextObservationResponse;
+import org.example.mattmontalbano.particlefilter.api.model.ParticleFilterProcessingResponse;
 import org.example.mattmontalbano.particlefilter.api.model.ScenarioModel;
 import org.example.mattmontalbano.particlefilter.api.repository.ParticleFilterRepository;
 import org.example.mattmontalbano.particlefilter.api.repository.ScenarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
+import java.util.UUID;
 
 @Service
 public class ParticleFilterService {
@@ -24,7 +25,7 @@ public class ParticleFilterService {
         this._scenarioRepository = scenarioRepository;
     }
 
-    public Particle[] create(String particleFilterId, CreateParticleFilterRequest request) {
+    public ParticleFilterProcessingResponse create(CreateParticleFilterRequest request) {
         ScenarioModel scenarioModel = _scenarioRepository.findById(request.scenarioId());
         NewRandom randGen = new NewRandom(new Random(scenarioModel.seed()));
         PositionObservation[] observations = PositionObservation.createObservations(scenarioModel.trueTargetStates(),
@@ -42,11 +43,12 @@ public class ParticleFilterService {
 
         ParticleFilterRunner particleFilterRunner = new ParticleFilterRunner(particleFilter, scenario);
 
-        ParticleFilterModel particleFilterModel = new ParticleFilterModel(particleFilterId, particleFilterRunner);
+        String id = UUID.randomUUID().toString();
+        ParticleFilterModel particleFilterModel = new ParticleFilterModel(id, particleFilterRunner);
 
         _particleFilterRepository.create(particleFilterModel);
 
-        return startingParticles;
+        return new ParticleFilterProcessingResponse(id, startTime, startingParticles);
     }
 
     public Particle[] updateParticleFilterTime(String particleFilterId, long time) {
@@ -55,13 +57,14 @@ public class ParticleFilterService {
         return particleFilterModel.particleFilterRunner().getParticleFilter().getParticleSet();
     }
 
-    public ProcessNextObservationResponse processNextObservation(String particleFilterId) {
+    public ParticleFilterProcessingResponse processNextObservation(String particleFilterId) {
         ParticleFilterModel particleFilterModel = _particleFilterRepository.findById(particleFilterId);
         particleFilterModel.particleFilterRunner().processNextObservation();
         ParticleFilterRunner particleFilterRunner = particleFilterModel.particleFilterRunner();
-        return new ProcessNextObservationResponse(particleFilterRunner.getCurrentTime(),
-                                                  particleFilterRunner.getParticleFilter()
-                                                                      .getParticleSet());
+        return new ParticleFilterProcessingResponse(particleFilterId,
+                                                    particleFilterRunner.getCurrentTime(),
+                                                    particleFilterRunner.getParticleFilter()
+                                                                        .getParticleSet());
     }
 
 }

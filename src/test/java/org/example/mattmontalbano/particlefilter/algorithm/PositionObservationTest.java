@@ -32,8 +32,8 @@ public class PositionObservationTest {
     public void givenCloseDistance_whenComputeLikelihood_returnHighProbability() {
         double standardDeviation = 4;
         Particle particleMock = mock(Particle.class);
-        when(particleMock.getX()).thenReturn(standardDeviation * 0.5);
-        when(particleMock.getY()).thenReturn(standardDeviation * 0.5);
+        when(particleMock.getX()).thenReturn(standardDeviation * 0.1);
+        when(particleMock.getY()).thenReturn(standardDeviation * 0.1);
         PositionObservation observation = new PositionObservation(0,
                                                                   0,
                                                                   standardDeviation,

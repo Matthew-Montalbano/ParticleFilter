@@ -1,0 +1,144 @@
+{
+  "scenarios": [
+    {
+      "id": "default",
+      "trueTargetStates": [
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 0
+        },
+        {
+          "x": 5.0,
+          "y": 5.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 5
+        },
+        {
+          "x": 10.0,
+          "y": 10.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 10
+        },
+        {
+          "x": 15.0,
+          "y": 15.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 15
+        },
+        {
+          "x": 20.0,
+          "y": 20.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 20
+        },
+        {
+          "x": 25.0,
+          "y": 25.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 25
+        },
+        {
+          "x": 30.0,
+          "y": 30.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 30
+        },
+        {
+          "x": 37.0,
+          "y": 37.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 35
+        },
+        {
+          "x": 45.0,
+          "y": 45.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 40
+        },
+        {
+          "x": 55.0,
+          "y": 55.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 45
+        },
+        {
+          "x": 63.0,
+          "y": 63.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 50
+        },
+        {
+          "x": 70.0,
+          "y": 70.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 55
+        },
+        {
+          "x": 75.0,
+          "y": 75.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 60
+        },
+        {
+          "x": 78.0,
+          "y": 79.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 65
+        },
+        {
+          "x": 82.0,
+          "y": 84.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 70
+        },
+        {
+          "x": 84.0,
+          "y": 90.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 75
+        },
+        {
+          "x": 86.0,
+          "y": 95.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 80
+        },
+        {
+          "x": 87.0,
+          "y": 100.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 85
+        },
+        {
+          "x": 88.0,
+          "y": 106.0,
+          "xVelocity": 1.0,
+          "yVelocity": 1.0,
+          "time": 90
+        }
+      ],
+      "standardDeviation": 3.0,
+      "seed": 100
+    }
+  ]
+}

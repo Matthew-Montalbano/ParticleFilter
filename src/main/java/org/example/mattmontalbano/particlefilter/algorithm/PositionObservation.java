@@ -23,7 +23,7 @@ public class PositionObservation implements Observation {
 
     @Override
     public double computeLikelihood(Particle particle) {
-        double distance = calculateDistance(_x, particle.getX(), _y, particle.getY());
+        double distance = calculateDistance(getX(), particle.getX(), getY(), particle.getY());
         return _dist.density(distance);
     }
 
