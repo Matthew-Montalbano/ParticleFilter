@@ -8,8 +8,11 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,8 +45,9 @@ public class ScenarioRepository {
 
     private void loadDefaultScenariosFromJSON() {
         JSONParser parser = new JSONParser();
-        try (FileReader reader = new FileReader(
-                "C:\\Users\\Matthew Montalbano\\Documents\\ParticleFilter\\src\\main\\resources\\scenarios.json")) {
+        URL resource = getClass().getClassLoader().getResource("scenarios.json");
+
+        try (FileReader reader = new FileReader(new File(resource.toURI()))) {
             Object obj = parser.parse(reader);
             JSONArray scenarios = (JSONArray) ((JSONObject) obj).get("scenarios");
             for (Object scenario : scenarios) {
@@ -67,7 +71,7 @@ public class ScenarioRepository {
                                                  standardDeviation,
                                                  seed));
             }
-        } catch (IOException | ParseException e) {
+        } catch (IOException | ParseException | URISyntaxException e) {
             e.printStackTrace();
         }
     }

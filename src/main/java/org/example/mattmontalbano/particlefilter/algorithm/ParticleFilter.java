@@ -21,7 +21,6 @@ public class ParticleFilter {
         }
         double maneuverChance = _meanManeuverTime == 0 ? 1 : poissonTimeIntervalCDF(timePassed, 1 / _meanManeuverTime);
         for (Particle particle : _particleSet) {
-            particle.addCurrentStateToHistory();
             if (_randGen.nextDouble() < maneuverChance) {
                 particle.maneuver();
             }
@@ -61,6 +60,7 @@ public class ParticleFilter {
                 sampledParticle.setWasSampled(true);
             }
             newParticle.setWasSampled(false);
+            newParticle.addCurrentStateToHistory();
             newParticles[i] = newParticle;
         }
         _particleSet = newParticles;

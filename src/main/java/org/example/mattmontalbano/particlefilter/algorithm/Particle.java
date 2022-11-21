@@ -36,6 +36,7 @@ public class Particle extends TimeStateObject {
         _randGen = randGen;
         setXVelocity(xVel);
         setYVelocity(yVel);
+        addCurrentStateToHistory();
     }
 
     public Particle(double x,
@@ -120,5 +121,9 @@ public class Particle extends TimeStateObject {
         } else {
             return speed;
         }
+    }
+
+    public Map<Long, State> getHistory() {
+        return _history;
     }
 }

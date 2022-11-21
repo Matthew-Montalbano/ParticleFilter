@@ -40,6 +40,7 @@ public class PositionObservation implements Observation {
             double x = target.getX() + randGen.nextDoubleBetween(-standardDeviation, standardDeviation);
             double y = target.getY() + randGen.nextDoubleBetween(-standardDeviation, standardDeviation);
             observations[i] = new PositionObservation(x, y, standardDeviation, target.getTime(), randGen);
+            System.out.printf("Observation at time %d: (%f, %f)%n", target.getTime(), x, y);
         }
         return observations;
     }
